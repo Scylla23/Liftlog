@@ -32,3 +32,21 @@ export interface Exercise {
   notes?: string;
   isCustom?: boolean;
 }
+
+import { User as SupabaseUser } from '@supabase/supabase-js';
+
+export type User = SupabaseUser;
+
+export interface AuthError {
+  message: string;
+  code?: string;
+}
+
+export type OAuthProvider = 'google' | 'apple';
+
+export interface AuthState {
+  user: User | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: AuthError | null;
+}

@@ -46,6 +46,13 @@ const en = {
   english: 'English',
   spanish: 'Spanish',
   cancel: 'Cancel',
+  continueWithGoogle: 'Continue with Google',
+  continueWithApple: 'Continue with Apple',
+  trackWorkoutsStayConsistent: 'Track your workouts, stay consistent',
+  authError: 'Authentication Error',
+  authCancelled: 'Authentication was cancelled',
+  tryAgain: 'Try Again',
+  getStarted: 'Get Started',
 };
 
 export default en;

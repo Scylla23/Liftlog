@@ -6,6 +6,7 @@ export const secureStore = {
       return await getItemAsync(key);
     } catch (error) {
       console.error('Error getting item from secure store: ', error);
+      return null;
     }
   },
   setItem: async (key: string, value: string) => {
