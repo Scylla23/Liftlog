@@ -78,16 +78,20 @@ export default function ExercisesScreen() {
         <View style={styles.exerciseCard}>
           <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
           <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
-        </View><View style={styles.exerciseCard}>
+        </View>
+        <View style={styles.exerciseCard}>
           <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
           <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
-        </View><View style={styles.exerciseCard}>
+        </View>
+        <View style={styles.exerciseCard}>
           <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
           <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
-        </View><View style={styles.exerciseCard}>
+        </View>
+        <View style={styles.exerciseCard}>
           <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
           <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
-        </View><View style={styles.exerciseCard}>
+        </View>
+        <View style={styles.exerciseCard}>
           <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
           <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
         </View>
@@ -151,4 +155,5 @@ const styles = StyleSheet.create({
     fontSize: fontSize.sm,
     color: colors.textSecondary,
   },
+  exercisesList: {},
 });
