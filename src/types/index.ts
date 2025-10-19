@@ -4,7 +4,7 @@ export interface Profile {
   dateOfBirth: string;
   height: number;
   weight: number;
-  preferredUnits: "kg" | "lb";
+  preferredUnits: 'kg' | 'lb';
 }
 
 export interface WorkoutSet {
