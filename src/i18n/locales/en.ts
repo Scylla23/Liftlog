@@ -41,6 +41,11 @@ const en = {
   loading: 'Loading',
   welcomeToLiftLog: 'Welcome to LiftLog',
   yourPersonalGymCompanion: 'Your personal gym companion',
+  language: 'Language',
+  selectLanguage: 'Select Language',
+  english: 'English',
+  spanish: 'Spanish',
+  cancel: 'Cancel',
 };
 
 export default en;

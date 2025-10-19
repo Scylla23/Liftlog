@@ -3,28 +3,31 @@ import { colors } from '@/constants/colors';
 import { borderRadius, spacing } from '@/constants/spacing';
 import { commonStyles } from '@/constants/styles';
 import CustomScrollView from '@/components/CustomScrollView';
-import en from '@/i18n/en';
+import { useLanguage } from '@/hooks/useLanguage';
 import { fontSize, fontWeight } from '@/constants/typography';
 
 export default function ExercisesScreen() {
   const exerciseCategories = ['All', 'Chest', 'Back', 'Legs', 'Arms', 'Shoulders', 'Core'];
+
+  const { t } = useLanguage();
+
   return (
     <CustomScrollView>
       <View style={commonStyles.header}>
-        <Text style={commonStyles.title}>{en.exerciseLibrary}</Text>
-        <Text style={commonStyles.subtitle}>{en.buildYourPerfectWorkout}</Text>
+        <Text style={commonStyles.title}>{t('exerciseLibrary')}</Text>
+        <Text style={commonStyles.subtitle}>{t('buildYourPerfectWorkout')}</Text>
       </View>
 
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
-          placeholder={en.searchExercises}
+          placeholder={t('searchExercises')}
           placeholderTextColor={colors.textMuted}
         />
       </View>
 
       <View style={styles.categoriesContainer}>
-        <Text style={styles.sectionTitle}>{en.categories}</Text>
+        <Text style={styles.sectionTitle}>{t('categories')}</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View style={styles.categoryChips}>
             {exerciseCategories.map((category) => (
@@ -37,39 +40,56 @@ export default function ExercisesScreen() {
       </View>
 
       <View style={styles.exercisesList}>
-        <Text style={styles.sectionTitle}>{en.popularExercises}</Text>
+        <Text style={styles.sectionTitle}>{t('popularExercises')}</Text>
         <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{en.benchPress}</Text>
-          <Text style={styles.exerciseCategory}>{en.chest}</Text>
+          <Text style={styles.exerciseName}>{t('benchPress')}</Text>
+          <Text style={styles.exerciseCategory}>{t('chest')}</Text>
         </View>
         <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{en.squat}</Text>
-          <Text style={styles.exerciseCategory}>{en.legs}</Text>
+          <Text style={styles.exerciseName}>{t('squat')}</Text>
+          <Text style={styles.exerciseCategory}>{t('legs')}</Text>
         </View>
         <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{en.deadlift}</Text>
-          <Text style={styles.exerciseCategory}>{en.back}</Text>
+          <Text style={styles.exerciseName}>{t('deadlift')}</Text>
+          <Text style={styles.exerciseCategory}>{t('back')}</Text>
         </View>
         <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{en.overheadPress}</Text>
-          <Text style={styles.exerciseCategory}>{en.shoulders}</Text>
+          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
+          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
         </View>
 
         <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{en.overheadPress}</Text>
-          <Text style={styles.exerciseCategory}>{en.shoulders}</Text>
+          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
+          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
         </View>
         <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{en.overheadPress}</Text>
-          <Text style={styles.exerciseCategory}>{en.shoulders}</Text>
+          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
+          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
         </View>
         <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{en.overheadPress}</Text>
-          <Text style={styles.exerciseCategory}>{en.shoulders}</Text>
+          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
+          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
         </View>
         <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{en.overheadPress}</Text>
-          <Text style={styles.exerciseCategory}>{en.shoulders}</Text>
+          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
+          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
+        </View>
+
+        <View style={styles.exerciseCard}>
+          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
+          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
+        </View><View style={styles.exerciseCard}>
+          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
+          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
+        </View><View style={styles.exerciseCard}>
+          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
+          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
+        </View><View style={styles.exerciseCard}>
+          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
+          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
+        </View><View style={styles.exerciseCard}>
+          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
+          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
         </View>
       </View>
     </CustomScrollView>
@@ -112,9 +132,6 @@ const styles = StyleSheet.create({
     fontSize: fontSize.sm,
     color: colors.text,
     fontWeight: fontWeight.medium,
-  },
-  exercisesList: {
-    marginBottom: spacing.xl,
   },
   exerciseCard: {
     backgroundColor: colors.card,

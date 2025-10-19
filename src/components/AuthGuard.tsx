@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { colors } from '@/constants/colors';
 import { borderRadius, spacing } from '@/constants/spacing';
 import { useAuth } from '@/hooks/useAuth';
-import en from '@/i18n/en';
+import { useLanguage } from '@/hooks/useLanguage';
 import { fontSize, fontWeight, lineHeight } from '@/constants/typography';
 
 interface AuthGuardProps {
@@ -13,11 +13,13 @@ interface AuthGuardProps {
 export default function AuthGuard({ children, fallback }: AuthGuardProps) {
   const { isAuthenticated, isLoading } = useAuth();
 
+  const { t } = useLanguage();
+
   if (isLoading) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color={colors.primary} />
-        <Text style={styles.loadingText}>{en.loading}...</Text>
+        <Text style={styles.loadingText}>{t('loading')}...</Text>
       </View>
     );
   }
@@ -32,6 +34,8 @@ export default function AuthGuard({ children, fallback }: AuthGuardProps) {
 function LoginScreen() {
   const { login } = useAuth();
 
+  const { t } = useLanguage();
+
   const handleLogin = () => {
     login('demo@example.com', 'password');
   };
@@ -39,11 +43,11 @@ function LoginScreen() {
   return (
     <View style={styles.loginContainer}>
       <View style={styles.loginCard}>
-        <Text style={styles.loginTitle}>{en.welcomeToLiftLog}</Text>
-        <Text style={styles.loginSubtitle}>{en.yourPersonalGymCompanion}</Text>
+        <Text style={styles.loginTitle}>{t('welcomeToLiftLog')}</Text>
+        <Text style={styles.loginSubtitle}>{t('yourPersonalGymCompanion')}</Text>
 
         <View style={styles.loginButton} onTouchEnd={handleLogin}>
-          <Text style={styles.loginButtonText}>{en.signIn}</Text>
+          <Text style={styles.loginButtonText}>{t('signIn')}</Text>
         </View>
 
         <Text style={styles.loginNote}>

@@ -3,9 +3,12 @@ import { colors } from '@/constants/colors';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 import { commonStyles } from '@/constants/styles';
-import en from '@/i18n/en';
+import { useLanguage } from '@/hooks/useLanguage';
+import '@/i18n';
 
 export default function RootLayout() {
+  const { t } = useLanguage();
+
   return (
     <View style={commonStyles.container}>
       <StatusBar style="light" backgroundColor={colors.background} />
@@ -20,14 +23,6 @@ export default function RootLayout() {
         <Stack.Screen
           name="(tabs)"
           options={{
-            headerShown: false,
-          }}
-        />
-
-        <Stack.Screen
-          name="login"
-          options={{
-            title: en.signIn,
             headerShown: false,
           }}
         />

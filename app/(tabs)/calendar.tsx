@@ -3,21 +3,23 @@ import { colors } from '@/constants/colors';
 import { borderRadius, spacing } from '@/constants/spacing';
 import { commonStyles } from '@/constants/styles';
 import CustomScrollView from '@/components/CustomScrollView';
-import en from '@/i18n/en';
 import { fontSize, fontWeight } from '@/constants/typography';
+import { useLanguage } from '@/hooks/useLanguage';
 
 export default function CalendarScreen() {
   const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
+  const { t } = useLanguage();
+
   return (
     <CustomScrollView>
       <View style={commonStyles.header}>
-        <Text style={commonStyles.title}>{en.workoutCalendar}</Text>
-        <Text style={commonStyles.subtitle}>{en.trackYourFitnessJourney}</Text>
+        <Text style={commonStyles.title}>{t('workoutCalendar')}</Text>
+        <Text style={commonStyles.subtitle}>{t('trackYourFitnessJourney')}</Text>
       </View> 
 
       <View style={styles.calendarContainer}>
-        <Text style={styles.sectionTitle}>{en.thisWeek}</Text>
+        <Text style={styles.sectionTitle}>{t('thisWeek')}</Text>
         <View style={styles.weekGrid}>
           {daysOfWeek.map((day, index) => (
             <View key={day} style={styles.dayCard}>

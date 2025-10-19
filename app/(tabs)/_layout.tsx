@@ -4,11 +4,13 @@ import { Home, Calendar, Dumbbell, User } from 'lucide-react-native';
 import { colors } from '@/constants/colors';
 import AuthGuard from '@/components/AuthGuard';
 import { commonStyles } from '@/constants/styles';
-import en from '@/i18n/en';
 import { spacing } from '@/constants/spacing';
 import { fontSize, fontWeight } from '@/constants/typography';
+import { useLanguage } from '@/hooks/useLanguage';
 
 export default function TabLayout() {
+  const { t } = useLanguage();
+
   return (
     <SafeAreaView style={commonStyles.container} edges={['bottom']}>
       <AuthGuard>
@@ -45,7 +47,7 @@ export default function TabLayout() {
           <Tabs.Screen
             name="index"
             options={{
-              title: en.home,
+              title: t('home') ,
               tabBarIcon: ({ color, size, focused }) => (
                 <Home 
                   color={color} 
@@ -58,7 +60,7 @@ export default function TabLayout() {
           <Tabs.Screen
             name="calendar"
             options={{
-              title: en.calendar,
+              title: t('calendar'),
               tabBarIcon: ({ color, size, focused }) => (
                 <Calendar 
                   color={color} 
@@ -71,7 +73,7 @@ export default function TabLayout() {
           <Tabs.Screen
             name="exercises"
             options={{
-              title: en.exercises,
+              title: t('exercises'),
               tabBarIcon: ({ color, size, focused }) => (
                 <Dumbbell 
                   color={color} 
@@ -84,7 +86,7 @@ export default function TabLayout() {
           <Tabs.Screen
             name="profile"
             options={{
-              title: en.profile,
+              title: t('profile'),
               tabBarIcon: ({ color, size, focused }) => (
                 <User 
                   color={color} 

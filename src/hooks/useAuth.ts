@@ -12,14 +12,9 @@ export function useAuth() {
   const [user, setUser] = useState<typeof mockUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Simulate checking auth state on app start
   useEffect(() => {
     const checkAuthState = async () => {
-      // Simulate API call delay
       await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // For demo purposes, start as authenticated
-      // In real app, check for stored tokens, validate with server, etc.
       setUser(mockUser);
       setIsLoading(false);
     };
@@ -30,10 +25,8 @@ export function useAuth() {
   const login = async (email: string, password: string) => {
     setIsLoading(true);
 
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    // Mock successful login
     setUser(mockUser);
     setIsLoading(false);
   };
@@ -41,7 +34,6 @@ export function useAuth() {
   const logout = async () => {
     setIsLoading(true);
 
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     setUser(null);

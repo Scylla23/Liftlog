@@ -3,43 +3,45 @@ import { colors } from '@/constants/colors';
 import { borderRadius, spacing } from '@/constants/spacing';
 import { commonStyles } from '@/constants/styles';
 import CustomScrollView from '@/components/CustomScrollView';
-import en from '@/i18n/en';
+import { useLanguage } from '@/hooks/useLanguage';
 import { fontSize, fontWeight } from '@/constants/typography';
 
 export default function HomeScreen() {
+  const { t } = useLanguage();
+
   return (
     <CustomScrollView>
       <View style={styles.header}>
-        <Text style={styles.greeting}>{en.welcomeBack}!</Text>
-        <Text style={commonStyles.subtitle}>{en.readyForYourNextWorkout}</Text>
+        <Text style={styles.greeting}>{t('welcomeBack')}!</Text>
+        <Text style={commonStyles.subtitle}>{t('readyForYourNextWorkout')}</Text>
       </View>
 
       <View style={styles.statsContainer}>
-        <Text style={styles.sectionTitle}>{en.todayStats}</Text>
+        <Text style={styles.sectionTitle}>{t('todayStats')}</Text>
         <View style={styles.statsGrid}>
           <View style={styles.statCard}>
             <Text style={styles.statNumber}>0</Text>
-            <Text style={styles.statLabel}>{en.workouts}</Text>
+            <Text style={styles.statLabel}>{t('workouts')}</Text>
           </View>
           <View style={styles.statCard}>
             <Text style={styles.statNumber}>0</Text>
-            <Text style={styles.statLabel}>{en.exercises}</Text>
+            <Text style={styles.statLabel}>{t('exercises')}</Text>
           </View>
           <View style={styles.statCard}>
             <Text style={styles.statNumber}>0</Text>
-            <Text style={styles.statLabel}>{en.minutes}</Text>
+            <Text style={styles.statLabel}>{t('minutes')}</Text>
           </View>
         </View>
       </View>
 
       <View style={styles.quickActions}>
-        <Text style={styles.sectionTitle}>{en.quickActions}</Text>
+        <Text style={styles.sectionTitle}>{t('quickActions')}</Text>
         <View style={styles.actionButtonsContainer}>
         <View style={styles.actionButton}>
-          <Text style={styles.actionButtonText}>{en.startNewWorkout}</Text>
+          <Text style={styles.actionButtonText}>{t('startNewWorkout')}</Text>
         </View>
         <View style={[styles.actionButton, styles.secondaryButton]}>
-          <Text style={styles.secondaryButtonText}>{en.viewProgress}</Text>
+          <Text style={styles.secondaryButtonText}>{t('viewProgress')}</Text>
         </View>
         </View>
       </View>
