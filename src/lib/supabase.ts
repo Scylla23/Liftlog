@@ -1,16 +1,17 @@
 import { createClient } from '@supabase/supabase-js';
 import { secureStore } from './secureStore';
 import Constants from 'expo-constants';
+import { Platform } from 'react-native';
 
-const SUPABASE_URL = Constants.expoConfig?.extra?.supabseUrl;
+const SUPABASE_URL = Constants.expoConfig?.extra?.supabaseUrl;
 const SUPABASE_ANON_KEY = Constants.expoConfig?.extra?.supabaseAnonKey;
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: {
-    storage: secureStore as any,
+    storage: Platform.OS === 'web' ? null : (secureStore as any),
     autoRefreshToken: true,
     persistSession: true,
-    detectSessionInUrl: false,
+    detectSessionInUrl: true,
   },
 });
 

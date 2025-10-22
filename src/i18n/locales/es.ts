@@ -46,6 +46,8 @@ const es = {
   english: 'Inglés',
   spanish: 'Español',
   cancel: 'Cancelar',
+  trackWorkoutsStayConsistent: 'Rastrea tus entrenamientos, mantente constante',
+  getStarted: 'Empezar',
 };
 
 export default es;
