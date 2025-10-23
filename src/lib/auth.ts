@@ -61,7 +61,6 @@ export const signInWithGoogle = async () => {
       try {
         // 1. Define redirectUri for mobile, using our app's scheme
         const redirectUri = makeRedirectUri({
-          scheme: 'liftlog', // Tell it to use our app's scheme
           path: 'login-callback',
         });
         console.log('Using MOBILE redirect URI:', redirectUri);
@@ -70,7 +69,7 @@ export const signInWithGoogle = async () => {
           provider: 'google',
           options: {
             redirectTo: redirectUri,
-            skipBrowserRedirect: true, // We'll handle the redirect manually
+            skipBrowserRedirect: true,
           },
         });
 
