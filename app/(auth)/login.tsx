@@ -73,7 +73,7 @@ export default function LoginScreen() {
         disabled={loading}
       >
         <Text style={styles.googleButtonText}>
-          {loading ? 'Loading...' : 'Signinn with Google'}
+          {loading ? 'Loading...' : 'Sign In with Google'}
         </Text>
       </TouchableOpacity>
 

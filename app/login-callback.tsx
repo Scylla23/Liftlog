@@ -13,7 +13,7 @@ const LoginCallback = () => {
       if (session) {
         // Auth is complete! Redirect to the main app.
         // use 'replace' to prevent the user from going "back" to the callback screen.
-        router.replace('/(tabs)/');
+        router.replace('/(tabs)');
       } else {
         // Something went wrong, or user is not logged in
         // Send them back to the login page

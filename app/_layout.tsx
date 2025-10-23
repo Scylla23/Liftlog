@@ -27,14 +27,18 @@ function RootLayoutNav() {
       return;
     }
 
-    const inAuthGroup = segments[0] === '(auth)';
+    const root = segments[0]; // e.g., '(auth)', '(tabs)', undefined
+    const inAuth = root === '(auth)';
+    const inTabs = root === '(tabs)';
 
-    if (session && !inAuthGroup) {
-      // User is logged in redirect them
-      router.replace('/(tabs)');
-    } else if (!session && !inAuthGroup) {
-      // User is logged out
-      router.replace('/(auth)/landing');
+    if (session) {
+      if (!inTabs) {
+        router.replace('/(tabs)');
+      }
+    } else {
+      if (!inAuth) {
+        router.replace('/(auth)/landing');
+      }
     }
   }, [session, loading, segments, router]);
 
