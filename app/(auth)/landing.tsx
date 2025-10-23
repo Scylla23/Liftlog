@@ -3,9 +3,8 @@ import { spacing } from '@/constants/spacing';
 import { fontSize, fontWeight } from '@/constants/typography';
 import { useLanguage } from '@/hooks/useLanguage';
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Text, Image } from 'react-native';
 import { useRouter } from 'expo-router';
-import Svg from 'react-native-svg';
 
 export default function landing() {
   const { t } = useLanguage();
@@ -20,7 +19,11 @@ export default function landing() {
     <View style={styles.container}>
       <View style={styles.content}>
         <View style={styles.logoContainer}>
-          <Svg width={80} height={80} style={styles.logo} />
+          <Image
+            source={require('../../assets/liftlog-logo.png')}
+            style={styles.logo}
+            resizeMode="contain"
+          />
         </View>
 
         <Text style={styles.title}>Liftlog</Text>
@@ -61,9 +64,9 @@ const styles = StyleSheet.create({
     borderColor: colors.cardBorder,
   },
   logo: {
-    color: 'white',
     width: 80,
     height: 80,
+    backgroundColor: colors.background,
   },
   title: {
     fontSize: fontSize.xxxl,
