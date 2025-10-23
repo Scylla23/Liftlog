@@ -1,9 +1,10 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
-import { Session } from '@supabase/supabase-js';
+import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
 
 // Define the shape of our context
 interface AuthContextType {
+  user: User | null;
   session: Session | null;
   loading: boolean;
 }
@@ -42,7 +43,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const value = {
     session,
     loading,
+    user: session?.user || null,
   };
+  console.log('User', session?.user);
 
   // Don't render children until the initial session check is complete
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
