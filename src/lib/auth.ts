@@ -70,7 +70,7 @@ export const signInWithGoogle = async () => {
           provider: 'google',
           options: {
             redirectTo: redirectUri,
-            skipBrowserRedirect: false, // We'll handle the redirect manually
+            skipBrowserRedirect: true, // We'll handle the redirect manually
           },
         });
 
