@@ -2,7 +2,6 @@ import { Tabs } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Home, Calendar, Dumbbell, User } from 'lucide-react-native';
 import { colors } from '@/constants/colors';
-import AuthGuard from '@/components/AuthGuard';
 import { commonStyles } from '@/constants/styles';
 import { spacing } from '@/constants/spacing';
 import { fontSize, fontWeight } from '@/constants/typography';
