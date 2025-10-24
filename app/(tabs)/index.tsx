@@ -37,12 +37,12 @@ export default function HomeScreen() {
       <View style={styles.quickActions}>
         <Text style={styles.sectionTitle}>{t('quickActions')}</Text>
         <View style={styles.actionButtonsContainer}>
-        <View style={styles.actionButton}>
-          <Text style={styles.actionButtonText}>{t('startNewWorkout')}</Text>
-        </View>
-        <View style={[styles.actionButton, styles.secondaryButton]}>
-          <Text style={styles.secondaryButtonText}>{t('viewProgress')}</Text>
-        </View>
+          <View style={styles.actionButton}>
+            <Text style={styles.actionButtonText}>{t('startNewWorkout')}</Text>
+          </View>
+          <View style={[styles.actionButton, styles.secondaryButton]}>
+            <Text style={styles.secondaryButtonText}>{t('viewProgress')}</Text>
+          </View>
         </View>
       </View>
     </CustomScrollView>

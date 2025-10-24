@@ -1,14 +1,15 @@
-import { View, Text, StyleSheet, TouchableOpacity, Modal, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Modal, Alert, Image } from 'react-native';
 import { colors } from '@/constants/colors';
 import { borderRadius, spacing } from '@/constants/spacing';
-import { useAuth } from '@/hooks/useAuth';
 import CustomScrollView from '@/components/CustomScrollView';
 import { useLanguage } from '@/hooks/useLanguage';
 import { fontSize, fontWeight } from '@/constants/typography';
 import { useState } from 'react';
+import { signOut } from '@/lib/auth';
+import { useAuth } from '@/context/AuthContext';
 
 export default function ProfileScreen() {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const { t, changeLanguage, currentLanguage } = useLanguage();
   const [showLanguageModal, setShowLanguageModal] = useState(false);
 
@@ -27,11 +28,15 @@ export default function ProfileScreen() {
     <CustomScrollView>
       <View style={styles.header}>
         <View style={styles.avatarContainer}>
-          <Text style={styles.avatarText}>
-            {user?.name?.charAt(0).toUpperCase() || 'U'}
-          </Text>
+          {user?.user_metadata?.avatar_url ? (
+            <Image source={{ uri: user.user_metadata.avatar_url }} style={styles.avatarImage} />
+          ) : (
+            <Text style={styles.avatarText}>
+              {user?.user_metadata?.name?.charAt(0).toUpperCase() || 'U'}
+            </Text>
+          )}
         </View>
-        <Text style={styles.userName}>{user?.name || 'User'}</Text>
+        <Text style={styles.userName}>{user?.user_metadata?.name || 'User'}</Text>
         <Text style={styles.userEmail}>{user?.email || 'user@example.com'}</Text>
       </View>
 
@@ -55,44 +60,40 @@ export default function ProfileScreen() {
 
       <View style={styles.menuContainer}>
         <Text style={styles.sectionTitle}>{t('settings')}</Text>
-        
+
         <TouchableOpacity style={styles.menuItem}>
           <Text style={styles.menuItemText}>{t('personalInformation')}</Text>
           <Text style={styles.menuItemArrow}>›</Text>
         </TouchableOpacity>
-        
+
         <TouchableOpacity style={styles.menuItem}>
           <Text style={styles.menuItemText}>{t('workoutPreferences')}</Text>
           <Text style={styles.menuItemArrow}>›</Text>
         </TouchableOpacity>
-        
+
         <TouchableOpacity style={styles.menuItem}>
           <Text style={styles.menuItemText}>{t('notifications')}</Text>
           <Text style={styles.menuItemArrow}>›</Text>
         </TouchableOpacity>
-        
+
         <TouchableOpacity style={styles.menuItem}>
           <Text style={styles.menuItemText}>{t('privacySecurity')}</Text>
           <Text style={styles.menuItemArrow}>›</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
-          style={styles.menuItem}
-          onPress={() => setShowLanguageModal(true)}
-        >
+        <TouchableOpacity style={styles.menuItem} onPress={() => setShowLanguageModal(true)}>
           <Text style={styles.menuItemText}>{t('language')}</Text>
           <View style={styles.languageSelector}>
             <Text style={styles.currentLanguage}>
-              {languages.find(lang => lang.code === currentLanguage)?.name || t('english')}
+              {languages.find((lang) => lang.code === currentLanguage)?.name || t('english')}
             </Text>
             <Text style={styles.menuItemArrow}>›</Text>
           </View>
         </TouchableOpacity>
-        
       </View>
 
       <View style={styles.logoutContainer}>
-        <TouchableOpacity style={styles.logoutButton} onPress={logout}>
+        <TouchableOpacity style={styles.logoutButton} onPress={signOut}>
           <Text style={styles.logoutButtonText}>{t('signOut')}</Text>
         </TouchableOpacity>
       </View>
@@ -112,19 +113,19 @@ export default function ProfileScreen() {
                 key={language.code}
                 style={[
                   styles.languageOption,
-                  currentLanguage === language.code && styles.selectedLanguage
+                  currentLanguage === language.code && styles.selectedLanguage,
                 ]}
                 onPress={() => handleLanguageChange(language.code)}
               >
-                <Text style={[
-                  styles.languageOptionText,
-                  currentLanguage === language.code && styles.selectedLanguageText
-                ]}>
+                <Text
+                  style={[
+                    styles.languageOptionText,
+                    currentLanguage === language.code && styles.selectedLanguageText,
+                  ]}
+                >
                   {language.name}
                 </Text>
-                {currentLanguage === language.code && (
-                  <Text style={styles.checkmark}>✓</Text>
-                )}
+                {currentLanguage === language.code && <Text style={styles.checkmark}>✓</Text>}
               </TouchableOpacity>
             ))}
             <TouchableOpacity
@@ -153,6 +154,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: spacing.md,
+    overflow: 'hidden',
+  },
+  avatarImage: {
+    width: '100%',
+    height: '100%',
   },
   avatarText: {
     fontSize: fontSize.xxl,

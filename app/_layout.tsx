@@ -1,13 +1,52 @@
-import { Stack } from 'expo-router';
+import { Stack, useRouter, useSegments } from 'expo-router';
 import { colors } from '@/constants/colors';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 import { commonStyles } from '@/constants/styles';
 import { useLanguage } from '@/hooks/useLanguage';
 import '@/i18n';
+import { AuthProvider, useAuth } from '@/context/AuthContext';
+import { useEffect } from 'react';
 
 export default function RootLayout() {
+  return (
+    <AuthProvider>
+      <RootLayoutNav />
+    </AuthProvider>
+  );
+}
+
+function RootLayoutNav() {
   const { t } = useLanguage();
+  const { session, loading } = useAuth();
+  const router = useRouter();
+  const segments = useSegments();
+
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+
+    const root = segments[0]; // e.g., '(auth)', '(tabs)', undefined
+    const inAuth = root === '(auth)';
+    const inTabs = root === '(tabs)';
+
+    if (session) {
+      if (!inTabs) {
+        router.replace('/(tabs)');
+      }
+    } else {
+      if (!inAuth) {
+        router.replace('/(auth)/landing');
+      }
+    }
+  }, [session, loading, segments, router]);
+
+  // While loading, we can return null or a loading spinner
+  // TODO: add a loading spinner here
+  if (loading) {
+    return null;
+  }
 
   return (
     <View style={commonStyles.container}>
@@ -22,6 +61,12 @@ export default function RootLayout() {
       >
         <Stack.Screen
           name="(tabs)"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="(auth)"
           options={{
             headerShown: false,
           }}

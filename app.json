@@ -3,6 +3,9 @@
     "name": "Liftlog",
     "slug": "Liftlog",
     "scheme": "liftlog",
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,10 +27,7 @@
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "plugins": ["expo-secure-store", "expo-router"],
+    "plugins": ["expo-secure-store", "expo-router", "expo-web-browser"],
     "extra": {
       "supabaseUrl": "https://dyqzqylodyzpghqtqbri.supabase.co",
       "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR5cXpxeWxvZHl6cGdocXRxYnJpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA1MTUxNDcsImV4cCI6MjA3NjA5MTE0N30.3-oPfZsI-I3PB4_CZkb2t0-e4MARtw7Xo1tbLRr2dQg"
