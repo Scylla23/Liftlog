@@ -59,8 +59,8 @@ export default function AddExerciseModal({
 
   return (
     <Modal visible={visible} animationType="slide" transparent={true} onRequestClose={handleClose}>
-      <View style={styles.modalOverlay}>
-        <View style={styles.modalContent}>
+      <Pressable style={styles.modalOverlay} onPress={handleClose}>
+        <Pressable style={styles.modalContent} onPress={(e) => e.stopPropagation()}>
           <Text style={styles.modalTitle}>Add New Exercise</Text>
 
           {/* Name Input */}
@@ -146,8 +146,8 @@ export default function AddExerciseModal({
               <Text style={styles.saveButtonText}>Save</Text>
             </Pressable>
           </View>
-        </View>
-      </View>
+        </Pressable>
+      </Pressable>
     </Modal>
   );
 }

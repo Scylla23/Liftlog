@@ -77,7 +77,7 @@ export default function ExercisesScreen() {
         <View style={styles.exercisesList}>
           <Text style={styles.sectionTitle}>{t('popularExercises')}</Text>
           {exercises.map((exercise) => (
-            <View style={styles.exerciseCard}>
+            <View key={exercise.id} style={styles.exerciseCard}>
               <Text style={styles.exerciseName}>{exercise.name}</Text>
               <Text style={styles.exerciseCategory}>{exercise.categories.join(' • ')}</Text>
             </View>
