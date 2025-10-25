@@ -23,3 +23,10 @@ export const getAccessToken = async () => {
   } = await supabase.auth.getSession();
   return session?.access_token || null;
 };
+
+export const getUserId = async () => {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return user?.id;
+};

@@ -5,9 +5,31 @@ import { commonStyles } from '@/constants/styles';
 import CustomScrollView from '@/components/CustomScrollView';
 import { useLanguage } from '@/hooks/useLanguage';
 import { fontSize, fontWeight } from '@/constants/typography';
+import { useEffect, useState } from 'react';
+import { getExercises } from '@/lib/exercises';
+import { getUserId } from '@/lib/supabase';
+import { Exercise } from '@/types';
 
 export default function ExercisesScreen() {
-  const exerciseCategories = ['All', 'Chest', 'Back', 'Legs', 'Arms', 'Shoulders', 'Core'];
+  const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [exerciseCategories, setExerciseCategories] = useState(['All']);
+
+  // Get all exercises for user
+  const getExercisesData = async () => {
+    const userId = await getUserId();
+    console.log(userId);
+    const response = await getExercises(userId || '');
+    console.log(response);
+    setExercises(response);
+    const allCats = response.flatMap((ex) => ex.categories || []);
+    const uniqueCategories = ['All', ...new Set(allCats)];
+    console.log(uniqueCategories);
+    setExerciseCategories(uniqueCategories);
+  };
+
+  useEffect(() => {
+    getExercisesData();
+  }, []);
 
   const { t } = useLanguage();
 
@@ -41,56 +63,12 @@ export default function ExercisesScreen() {
 
       <View style={styles.exercisesList}>
         <Text style={styles.sectionTitle}>{t('popularExercises')}</Text>
-        <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{t('benchPress')}</Text>
-          <Text style={styles.exerciseCategory}>{t('chest')}</Text>
-        </View>
-        <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{t('squat')}</Text>
-          <Text style={styles.exerciseCategory}>{t('legs')}</Text>
-        </View>
-        <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{t('deadlift')}</Text>
-          <Text style={styles.exerciseCategory}>{t('back')}</Text>
-        </View>
-        <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
-          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
-        </View>
-
-        <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
-          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
-        </View>
-        <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
-          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
-        </View>
-        <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
-          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
-        </View>
-        <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
-          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
-        </View>
-
-        <View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
-          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
-        </View><View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
-          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
-        </View><View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
-          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
-        </View><View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
-          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
-        </View><View style={styles.exerciseCard}>
-          <Text style={styles.exerciseName}>{t('overheadPress')}</Text>
-          <Text style={styles.exerciseCategory}>{t('shoulders')}</Text>
-        </View>
+        {exercises.map((exercise) => (
+          <View style={styles.exerciseCard}>
+            <Text style={styles.exerciseName}>{exercise.name}</Text>
+            <Text style={styles.exerciseCategory}>{exercise.categories.join(' • ')}</Text>
+          </View>
+        ))}
       </View>
     </CustomScrollView>
   );
@@ -133,6 +111,7 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontWeight: fontWeight.medium,
   },
+  exercisesList: {},
   exerciseCard: {
     backgroundColor: colors.card,
     padding: spacing.md,
