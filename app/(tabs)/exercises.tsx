@@ -24,6 +24,7 @@ export default function ExercisesScreen() {
     setExerciseCategories(uniqueCategories);
   };
 
+  // Useeffect to get the exercise data on page mount
   useEffect(() => {
     getExercisesData();
   }, []);
@@ -38,10 +39,10 @@ export default function ExercisesScreen() {
     setIsModalVisible(false);
   };
 
-  const handleSaveExercise = (data: { name: string; categories: string[] }) => {
-    console.log('Exercise Data:', data);
+  const handleSaveExercise = async (data: { name: string; categories: string[] }) => {
     // Save exercise to database
-    addExercise(data.name, data.categories);
+    const resposne = await addExercise(data.name, data.categories);
+    setExercises((prev) => [resposne, ...prev]);
     setIsModalVisible(false);
   };
 
