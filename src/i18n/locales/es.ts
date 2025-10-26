@@ -1,5 +1,6 @@
 const es = {
   home: 'Inicio',
+  workout: 'Entrenamiento',
   calendar: 'Calendario',
   exercises: 'Ejercicios',
   profile: 'Perfil',
