@@ -14,37 +14,11 @@ interface RecentWorkout {
   id: string;
   name: string;
   sets: string;
-  updated_at: Date;
-  created_at: Date;
-  icon: any;
+  updated_at: string;
+  created_at: string;
 }
 
-const DUMMY_WORKOUTS: RecentWorkout[] = [
-  {
-    id: '1',
-    name: 'Upper Body',
-    sets: '18 sets',
-    updated_at: new Date(),
-    created_at: new Date(),
-    icon: Flame,
-  },
-  {
-    id: '2',
-    name: 'Leg Day',
-    sets: '20 sets',
-    updated_at: new Date(),
-    created_at: new Date(),
-    icon: Activity,
-  },
-  {
-    id: '3',
-    name: 'Full Body',
-    sets: '15 sets',
-    updated_at: new Date(),
-    created_at: new Date(),
-    icon: Heart,
-  },
-];
+const iconComponents: any[] = [Flame, Activity, Heart];
 
 export default function HomeScreen() {
   const [recentWorkout, setRecentWorkout] = useState<RecentWorkout[]>([]);
@@ -52,13 +26,18 @@ export default function HomeScreen() {
   const { t } = useLanguage();
 
   useEffect(() => {
-    getRecentWorkouts();
-    setRecentWorkout(DUMMY_WORKOUTS);
+    const fetchRecentWorkouts = async () => {
+      const response = await getRecentWorkouts();
+      setRecentWorkout(response);
+    };
+    fetchRecentWorkouts();
   }, []);
 
   // Get workout duration in minutes
-  const getWorkoutDuration = (created_at: Date, updated_at: Date): number => {
-    const diffMs = Math.abs(updated_at.getTime() - created_at.getTime()); // difference in milliseconds
+  const getWorkoutDuration = (created_at: string, updated_at: string): number => {
+    const createdDate = new Date(created_at);
+    const updatedDate = new Date(updated_at);
+    const diffMs = Math.abs(updatedDate.getTime() - createdDate.getTime());
     const diffMinutes = Math.floor(diffMs / (1000 * 60)); // convert ms → minutes
     return diffMinutes;
   };
@@ -104,28 +83,31 @@ export default function HomeScreen() {
       {/* Recent Workouts Section */}
       <Text style={styles.sectionTitle}>Recent Workouts</Text>
 
-      {recentWorkout.map((workout) => (
-        <Pressable key={workout.id} style={styles.workoutCard}>
-          <View style={styles.workoutIconContainer}>
-            <workout.icon size={24} color={colors.primary} strokeWidth={2} />
-          </View>
-          <View style={styles.workoutInfo}>
-            <Text style={styles.workoutName}>{workout.name}</Text>
-            <Text style={styles.workoutDetails}>
-              {`${getWorkoutDuration(workout.created_at, workout.updated_at)}  min`} •{' '}
-              {workout.sets}
-            </Text>
-          </View>
-          <View style={styles.workoutDateBadge}>
-            <Text style={styles.workoutDateText}>
-              {workout.updated_at.toLocaleDateString('en-US', {
-                month: 'short',
-                day: 'numeric',
-              })}
-            </Text>
-          </View>
-        </Pressable>
-      ))}
+      {recentWorkout.map((workout, index) => {
+        const IconComponent = iconComponents[index];
+        return (
+          <Pressable key={workout.id} style={styles.workoutCard}>
+            <View style={styles.workoutIconContainer}>
+              <IconComponent size={24} color={colors.primary} strokeWidth={2} />
+            </View>
+            <View style={styles.workoutInfo}>
+              <Text style={styles.workoutName}>{workout.name}</Text>
+              <Text style={styles.workoutDetails}>
+                {`${getWorkoutDuration(workout.created_at, workout.updated_at)}  min`} •{' '}
+                {workout.sets}
+              </Text>
+            </View>
+            <View style={styles.workoutDateBadge}>
+              <Text style={styles.workoutDateText}>
+                {new Date(workout.updated_at).toLocaleDateString('en-US', {
+                  month: 'short',
+                  day: 'numeric',
+                })}
+              </Text>
+            </View>
+          </Pressable>
+        );
+      })}
     </CustomScrollView>
   );
 }
