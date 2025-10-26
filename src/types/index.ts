@@ -28,7 +28,8 @@ export interface Workout {
 export interface Exercise {
   id: string;
   name: string;
-  category: string;
-  notes?: string;
-  isCustom?: boolean;
+  categories: [string];
+  created_by: string | null;
+  created_at: string;
+  updated_at: string;
 }

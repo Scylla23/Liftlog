@@ -14,6 +14,7 @@ export default function TabLayout() {
     <SafeAreaView style={commonStyles.container} edges={['bottom']}>
       <Tabs
         screenOptions={{
+          headerShown: false,
           tabBarStyle: {
             backgroundColor: colors.card,
             borderTopColor: colors.cardBorder,

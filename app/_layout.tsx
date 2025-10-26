@@ -57,6 +57,7 @@ function RootLayoutNav() {
           contentStyle: { backgroundColor: colors.background },
           headerStyle: { backgroundColor: colors.background },
           headerTintColor: colors.text,
+          headerShown: false,
         }}
       >
         <Stack.Screen
