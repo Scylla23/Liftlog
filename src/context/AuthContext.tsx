@@ -45,7 +45,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     loading,
     user: session?.user || null,
   };
-  console.log('User', session?.user);
 
   // Don't render children until the initial session check is complete
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

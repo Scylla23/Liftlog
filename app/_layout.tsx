@@ -49,7 +49,7 @@ function RootLayoutNav() {
   }
 
   return (
-    <View style={commonStyles.container}>
+    <View style={[commonStyles.container, { paddingTop: 50 }]}>
       <StatusBar style="light" backgroundColor={colors.background} />
 
       <Stack
