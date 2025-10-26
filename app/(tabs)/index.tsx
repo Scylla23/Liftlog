@@ -84,9 +84,9 @@ export default function HomeScreen() {
       <Text style={styles.sectionTitle}>Recent Workouts</Text>
 
       {recentWorkout.map((workout, index) => {
-        const IconComponent = iconComponents[index];
+        const IconComponent = iconComponents[index] || iconComponents[0];
         return (
-          <Pressable key={workout.id} style={styles.workoutCard}>
+          <Pressable key={`workout-${workout.id}-${index}`} style={styles.workoutCard}>
             <View style={styles.workoutIconContainer}>
               <IconComponent size={24} color={colors.primary} strokeWidth={2} />
             </View>
