@@ -24,8 +24,8 @@ export default function SetRow({
   onDelete,
   onToggleDone,
 }: SetRowProps) {
-  const [localWeight, setLocalWeight] = useState(weight.toString());
-  const [localReps, setLocalReps] = useState(reps.toString());
+  const [localWeight, setLocalWeight] = useState(weight > 0 ? weight.toString() : '');
+  const [localReps, setLocalReps] = useState(reps > 0 ? reps.toString() : '');
 
   const handleWeightChange = (text: string) => {
     setLocalWeight(text);
@@ -51,16 +51,7 @@ export default function SetRow({
           onPress={onToggleDone}
         >
           <Text style={[styles.setButtonText, isDone && styles.setButtonTextDone]}>
-            Set {setNumber}: {weight} kg
-          </Text>
-        </Pressable>
-
-        <Pressable
-          style={[styles.setButton, isDone && styles.setButtonDone]}
-          onPress={onToggleDone}
-        >
-          <Text style={[styles.setButtonText, isDone && styles.setButtonTextDone]}>
-            {reps} reps
+            Set {setNumber}
           </Text>
         </Pressable>
       </View>
