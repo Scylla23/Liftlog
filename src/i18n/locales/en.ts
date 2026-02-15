@@ -1,5 +1,6 @@
 const en = {
   home: 'Home',
+  workout: 'Workout',
   calendar: 'Calendar',
   exercises: 'Exercises',
   profile: 'Profile',

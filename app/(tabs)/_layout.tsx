@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Home, Calendar, Dumbbell, User } from 'lucide-react-native';
+import { Home, Calendar, Dumbbell, User, Target } from 'lucide-react-native';
 import { colors } from '@/constants/colors';
 import { commonStyles } from '@/constants/styles';
 import { spacing } from '@/constants/spacing';
@@ -53,6 +53,15 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
+          name="workout"
+          options={{
+            title: t('workout'),
+            tabBarIcon: ({ color, size, focused }) => (
+              <Dumbbell color={color} size={size} strokeWidth={focused ? 2.5 : 2} />
+            ),
+          }}
+        />
+        <Tabs.Screen
           name="calendar"
           options={{
             title: t('calendar'),
@@ -66,7 +75,7 @@ export default function TabLayout() {
           options={{
             title: t('exercises'),
             tabBarIcon: ({ color, size, focused }) => (
-              <Dumbbell color={color} size={size} strokeWidth={focused ? 2.5 : 2} />
+              <Target color={color} size={size} strokeWidth={focused ? 2.5 : 2} />
             ),
           }}
         />
